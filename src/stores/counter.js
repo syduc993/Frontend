@@ -12,7 +12,7 @@ export const useCounterStore = defineStore('counter', {
   state: () => {
     return {
       domain_Backend: 'https://syduc993.pythonanywhere.com', domain_Frontend: '', Path_Route: useRoute(),
-
+      //domain_Backend: 'http://127.0.0.1:8000', domain_Frontend: '', Path_Route: useRoute(),
       // Social///////////////////////
       Search_Book: '', Method_Book: 'None', Category_Book: 'None', less: '', greater: '', less_than: '', greater_than: '', Style_Book: 'Book name',
       Data_all_books: '',

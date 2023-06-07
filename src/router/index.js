@@ -15,10 +15,10 @@ const router = createRouter({
           path: "/",
           component: () => import("../views/HomeView.vue"),
         },
-        {
-          path: "/ta",
-          component: () => import("../views/HoView.vue"),
-        },
+        // {
+        //   path: "/ta",
+        //   component: () => import("../views/HoView.vue"),
+        // },
       ]
     },
   ],

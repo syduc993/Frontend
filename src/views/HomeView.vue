@@ -1,11 +1,11 @@
 <template>
   <div class="flex bg-gray-100 w-[1000px] h-full grow ">
     <div class="flex flex-col items-center min-w-[250px] border-r-[2px] border-gray-200  h-[full] px-2 py-5 gap-3">
-        <h1 v-on:click="counter.Tab_Function=1" :class="{'bg-sky-500 text-white':counter.Tab_Function==1}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Tách File tăng trưởng</h1>
-        <h1 v-on:click="counter.Tab_Function=2" :class="{'bg-sky-500 text-white':counter.Tab_Function==2}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Rải theo quy cách</h1>
-        <h1 v-on:click="counter.Tab_Function=3" :class="{'bg-sky-500 text-white':counter.Tab_Function==3}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Chức năng chưa có sẵn</h1>
-        <h1 v-on:click="counter.Tab_Function=4" :class="{'bg-sky-500 text-white':counter.Tab_Function==4}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Chức năng chưa có sẵn</h1>
-        <h1 v-on:click="counter.Tab_Function=5" :class="{'bg-sky-500 text-white':counter.Tab_Function==5}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Chức năng chưa có sẵn</h1>
+        <h1 v-on:click="counter.Tab_Function=1" :class="{'bg-sky-500 text-white':counter.Tab_Function==1}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Extract growth data- Store</h1>
+        <h1 v-on:click="counter.Tab_Function=2" :class="{'bg-sky-500 text-white':counter.Tab_Function==2}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Extract growth data - Product</h1>
+        <h1 v-on:click="counter.Tab_Function=3" :class="{'bg-sky-500 text-white':counter.Tab_Function==3}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">"Bóc lịch" - về hàng</h1>
+        <h1 v-on:click="counter.Tab_Function=4" :class="{'bg-sky-500 text-white':counter.Tab_Function==4}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Rải quy cách</h1>
+        <h1 v-on:click="counter.Tab_Function=5" :class="{'bg-sky-500 text-white':counter.Tab_Function==5}" class="bg-gray-300 rounded px-2 py-2 font-bold cursor-pointer w-full">Coming Soon </h1>
     </div>
     <div class="flex flex-col justify-center items-center w-full py-4 px-4">
       <div v-show="counter.Tab_Function==1" class="flex flex-col items-center w-full grow gap-4">
@@ -61,7 +61,6 @@
         </div>
       </div>
       <div v-show="counter.Tab_Function==2" class="flex flex-col items-center w-full grow gap-4">
-
         <div class="flex flex-col justify-center items-center min-h-[500px] border-[2px] border-gray-200 w-full px-2 py-2 gap-5">
           <div class="flex gap-5 justify-center items-center">
             <div v-show="counter.button_function==1||counter.button_function==2||counter.button_function==3" class="flex flex-col gap-2 justify-center items-center">
@@ -69,31 +68,83 @@
                 <font-awesome-icon icon="fa-solid fa-file"  class="text-[180px] text-yellow-500"/>
                 <div v-show="counter.button_function==3" class="flex justify-center items-center absolute inset-0"><span class="loader"></span></div>
               </div>
-              <span id="file-chosen" class="text-[20px] font-semibold">Chọn File ...</span>
+              <span id="file-chosen1" class="text-[20px] font-semibold">Chọn File ...</span>
             </div>
             <div v-show="counter.button_function==4" class="flex flex-col gap-2 justify-center items-center">
               <font-awesome-icon icon="fa-solid fa-file-circle-check" class="text-[180px] text-lime-600"/>
-              <span v-show="counter.button_function==4"  id="file-chosen" class="text-[20px] font-semibold">{{ counter.Return_data }}</span>
+              <span v-show="counter.button_function==4"  id="file-chosen1" class="text-[20px] font-semibold">{{ counter.Return_data }}</span>
             </div>
           </div>
           <div class="flex gap-3">
             <div v-show="counter.button_function==1" class="flex justify-center items-center ">
-              <label for="file" class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Tải lên Tệp(.xlsx)</label>
-              <input type="file" accept=".xlsx"  id="file" ref="file" @change="onFileChange();"  class="file hidden"/>
+              <label for="file1" class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Tải lên Tệp(.xlsx)</label>
+              <input type="file" accept=".xlsx"  id="file1" ref="file1" @change="onFileChange1();"  class="file hidden"/>
             </div>
-            <div v-show="counter.button_function==2" v-on:click="Send_data();" class="flex justify-center items-center ">
+            <div v-show="counter.button_function==2" v-on:click="Send_data1();" class="flex justify-center items-center ">
               <h1 class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Chuyển đổi</h1>
             </div>
             <!-- <button v-on:click="resetFile()" class="cursor-pointer bg-red-300">reset</button> -->
             <div v-show="counter.button_function==3" class=" flex justify-center items-center">
               <h1 class="flex justify-center items-center bg-gradient-to-r from-red-700 to-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-wait">Đang chuyển đổi</h1>
             </div>
-            <div v-show="counter.button_function==4" v-on:click="delete_zip();" class="flex justify-center items-center cursor-pointer">
+            <div v-show="counter.button_function==4" v-on:click="delete_zip1();" class="flex justify-center items-center cursor-pointer">
               <a class="flex justify-center items-center bg-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100" :href="counter.domain_Backend+'/'+counter.Return_data" download>Tải xuống</a>
             </div>
           </div>
           <div v-show="counter.Loi_file==2" class="flex justify-center items-center text-[18px] font-bold rounded text-red-500 border-[1px] border-red-500 px-2 py-1">Tệp tải lên bị lỗi, không phù hợp với chức năng</div>
-          <div v-on:click="counter.button_function=1; counter.Loi_file=1; resetFile();"  v-show="counter.button_function==4" class="flex justify-center items-center text-[22px] font-bold underline underline-offset-8 text-sky-600 cursor-pointer">Làm việc với một File khác</div>
+          <div v-on:click="counter.button_function=1; counter.Loi_file=1; resetFile1();"  v-show="counter.button_function==4" class="flex justify-center items-center text-[22px] font-bold underline underline-offset-8 text-sky-600 cursor-pointer">Làm việc với một File khác</div>
+        </div>
+        <div class="flex flex-col  items-center border-[2px] border-gray-200 px-2 w-full grow h-full ">
+          <div class="flex justify-center items-center w-full  h-[130px] border-b-[2px] border-gray-200"><h1 class="text-[40px] font-bold  w-full text-center">Các bước thực hiện chức năng</h1></div>
+          <div class="flex justify-center items-center gap-5 w-full h-full">
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-arrow-up" class="text-gray-800 text-[50px]" />
+                <h1 class="font-bold text-gray-600">Tải lên File(.xlsx)</h1>
+              </div>
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-export" class="text-gray-800 text-[50px]"/>
+                <h1 class="font-bold text-gray-600">Xử lý File(.xlsx)</h1>
+              </div>
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-arrow-down" class="text-gray-800 text-[50px]"/>
+                <h1 class="font-bold text-gray-600">Tải xuống Tệp(.zip)</h1>
+              </div>
+          </div>
+        </div>   
+      </div>
+      <div v-show="counter.Tab_Function==3" class="flex flex-col items-center w-full grow gap-4">
+        <div class="flex flex-col justify-center items-center min-h-[500px] border-[2px] border-gray-200 w-full px-2 py-2 gap-5">
+          <div class="flex gap-5 justify-center items-center">
+            <div v-show="counter.button_function==1||counter.button_function==2||counter.button_function==3" class="flex flex-col gap-2 justify-center items-center">
+              <div class="relative flex justify-center items-center">
+                <font-awesome-icon icon="fa-solid fa-file"  class="text-[180px] text-yellow-500"/>
+                <div v-show="counter.button_function==3" class="flex justify-center items-center absolute inset-0"><span class="loader"></span></div>
+              </div>
+              <span id="file-chosen2" class="text-[20px] font-semibold">Chọn File ...</span>
+            </div>
+            <div v-show="counter.button_function==4" class="flex flex-col gap-2 justify-center items-center">
+              <font-awesome-icon icon="fa-solid fa-file-circle-check" class="text-[180px] text-lime-600"/>
+              <span v-show="counter.button_function==4"  id="file-chosen2" class="text-[20px] font-semibold">{{ counter.Return_data }}</span>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div v-show="counter.button_function==1" class="flex justify-center items-center ">
+              <label for="file2" class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Tải lên Tệp(.xlsx)</label>
+              <input type="file" accept=".xlsx"  id="file2" ref="file2" @change="onFileChange2();"  class="file hidden"/>
+            </div>
+            <div v-show="counter.button_function==2" v-on:click="Send_data2();" class="flex justify-center items-center ">
+              <h1 class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Chuyển đổi</h1>
+            </div>
+            <!-- <button v-on:click="resetFile()" class="cursor-pointer bg-red-300">reset</button> -->
+            <div v-show="counter.button_function==3" class=" flex justify-center items-center">
+              <h1 class="flex justify-center items-center bg-gradient-to-r from-red-700 to-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-wait">Đang chuyển đổi</h1>
+            </div>
+            <div v-show="counter.button_function==4" v-on:click="delete_zip2();" class="flex justify-center items-center cursor-pointer">
+              <a class="flex justify-center items-center bg-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100" :href="counter.domain_Backend+'/'+counter.Return_data" download>Tải xuống</a>
+            </div>
+          </div>
+          <div v-show="counter.Loi_file==2" class="flex justify-center items-center text-[18px] font-bold rounded text-red-500 border-[1px] border-red-500 px-2 py-1">Tệp tải lên bị lỗi, không phù hợp với chức năng</div>
+          <div v-on:click="counter.button_function=1; counter.Loi_file=1; resetFile2();"  v-show="counter.button_function==4" class="flex justify-center items-center text-[22px] font-bold underline underline-offset-8 text-sky-600 cursor-pointer">Làm việc với một File khác</div>
         </div>
         <div class="flex flex-col  items-center border-[2px] border-gray-200 px-2 w-full grow h-full ">
           <div class="flex justify-center items-center w-full  h-[130px] border-b-[2px] border-gray-200"><h1 class="text-[40px] font-bold  w-full text-center">Các bước thực hiện chức năng</h1></div>
@@ -111,12 +162,61 @@
                 <h1 class="font-bold text-gray-600">Tải xuống File(.xlsx)</h1>
               </div>
           </div>
-        </div>   
-      
+        </div>
       </div>
-      <div v-show="counter.Tab_Function==3" class="text-[50px] font-bold text-gray-300">Chức năng chưa có sẵn</div>
-      <div v-show="counter.Tab_Function==4" class="text-[50px] font-bold text-gray-300">Chức năng chưa có sẵn</div>
-      <div v-show="counter.Tab_Function==5" class="text-[50px] font-bold text-gray-300">Chức năng chưa có sẵn</div>
+      <div v-show="counter.Tab_Function==4" class="flex flex-col items-center w-full grow gap-4">
+        <div class="flex flex-col justify-center items-center min-h-[500px] border-[2px] border-gray-200 w-full px-2 py-2 gap-5">
+          <div class="flex gap-5 justify-center items-center">
+            <div v-show="counter.button_function==1||counter.button_function==2||counter.button_function==3" class="flex flex-col gap-2 justify-center items-center">
+              <div class="relative flex justify-center items-center">
+                <font-awesome-icon icon="fa-solid fa-file"  class="text-[180px] text-yellow-500"/>
+                <div v-show="counter.button_function==3" class="flex justify-center items-center absolute inset-0"><span class="loader"></span></div>
+              </div>
+              <span id="file-chosen3" class="text-[20px] font-semibold">Chọn File ...</span>
+            </div>
+            <div v-show="counter.button_function==4" class="flex flex-col gap-2 justify-center items-center">
+              <font-awesome-icon icon="fa-solid fa-file-circle-check" class="text-[180px] text-lime-600"/>
+              <span v-show="counter.button_function==4"  id="file-chosen3" class="text-[20px] font-semibold">{{ counter.Return_data }}</span>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div v-show="counter.button_function==1" class="flex justify-center items-center ">
+              <label for="file3" class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Tải lên Tệp(.xlsx)</label>
+              <input type="file" accept=".xlsx"  id="file3" ref="file3" @change="onFileChange3();"  class="file hidden"/>
+            </div>
+            <div v-show="counter.button_function==2" v-on:click="Send_data3();" class="flex justify-center items-center ">
+              <h1 class="flex justify-center items-center bg-red-700 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-pointer">Chuyển đổi</h1>
+            </div>
+            <!-- <button v-on:click="resetFile()" class="cursor-pointer bg-red-300">reset</button> -->
+            <div v-show="counter.button_function==3" class=" flex justify-center items-center">
+              <h1 class="flex justify-center items-center bg-gradient-to-r from-red-700 to-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100 cursor-wait">Đang chuyển đổi</h1>
+            </div>
+            <div v-show="counter.button_function==4" v-on:click="delete_zip3();" class="flex justify-center items-center cursor-pointer">
+              <a class="flex justify-center items-center bg-cyan-500 w-[200px] h-[50px] text-[18px] rounded font-bold text-gray-100" :href="counter.domain_Backend+'/'+counter.Return_data" download>Tải xuống</a>
+            </div>
+          </div>
+          <div v-show="counter.Loi_file==2" class="flex justify-center items-center text-[18px] font-bold rounded text-red-500 border-[1px] border-red-500 px-2 py-1">Tệp tải lên bị lỗi, không phù hợp với chức năng</div>
+          <div v-on:click="counter.button_function=1; counter.Loi_file=1; resetFile3();"  v-show="counter.button_function==4" class="flex justify-center items-center text-[22px] font-bold underline underline-offset-8 text-sky-600 cursor-pointer">Làm việc với một File khác</div>
+        </div>
+        <div class="flex flex-col  items-center border-[2px] border-gray-200 px-2 w-full grow h-full ">
+          <div class="flex justify-center items-center w-full  h-[130px] border-b-[2px] border-gray-200"><h1 class="text-[40px] font-bold  w-full text-center">Các bước thực hiện chức năng</h1></div>
+          <div class="flex justify-center items-center gap-5 w-full h-full">
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-arrow-up" class="text-gray-800 text-[50px]" />
+                <h1 class="font-bold text-gray-600">Tải lên File(.xlsx)</h1>
+              </div>
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-export" class="text-gray-800 text-[50px]"/>
+                <h1 class="font-bold text-gray-600">Xử lý File(.xlsx)</h1>
+              </div>
+              <div class="flex flex-col justify-center items-center text-[20px]">
+                <font-awesome-icon icon="fa-solid fa-file-arrow-down" class="text-gray-800 text-[50px]"/>
+                <h1 class="font-bold text-gray-600">Tải xuống File(.xlsx)</h1>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="counter.Tab_Function==5" class="text-[30px] font-bold text-gray-300">Liên hệ user 201353 để oder chức năng - 500k/Task </div>
     </div>
   </div>
 </template>
@@ -144,13 +244,52 @@ export default {
       onFileChange(){
         let image = this.$refs.file.files[0];
         const fileChosen = document.getElementById('file-chosen');
-        fileChosen.textContent = image.name
+        fileChosen.textContent = image.name;
         this.url_image = image;
         this.counter.button_function=2;
     },
+      onFileChange1(){
+        let image = this.$refs.file1.files[0];
+        const fileChosen = document.getElementById('file-chosen1');
+        fileChosen.textContent = image.name;
+        this.url_image = image;
+        this.counter.button_function=2;
+    },
+      onFileChange2(){
+        let image = this.$refs.file2.files[0];
+        const fileChosen = document.getElementById('file-chosen2');
+        fileChosen.textContent = image.name;
+        this.url_image = image;
+        this.counter.button_function=2;
+    },
+    onFileChange3(){
+        let image = this.$refs.file3.files[0];
+        const fileChosen = document.getElementById('file-chosen3');
+        fileChosen.textContent = image.name;
+        this.url_image = image;
+        this.counter.button_function=2;
+    },   
     resetFile() {
       this.$refs.file.value = null;
       const fileChosen = document.getElementById('file-chosen');
+      fileChosen.textContent = 'Chọn File ...';
+      this.counter.button_function=1;
+    },
+    resetFile1() {
+      this.$refs.file1.value = null;
+      const fileChosen = document.getElementById('file-chosen1');
+      fileChosen.textContent = 'Chọn File ...';
+      this.counter.button_function=1;
+    },
+    resetFile2() {
+      this.$refs.file2.value = null;
+      const fileChosen = document.getElementById('file-chosen2');
+      fileChosen.textContent = 'Chọn File ...';
+      this.counter.button_function=1;
+    },
+    resetFile3() {
+      this.$refs.file3.value = null;
+      const fileChosen = document.getElementById('file-chosen3');
       fileChosen.textContent = 'Chọn File ...';
       this.counter.button_function=1;
     },
@@ -174,6 +313,66 @@ export default {
         this.counter.Loi_file = 2;
       }
     },
+    async Send_data1() {
+      try{
+      this.counter.Loi_file=1;
+      this.counter.button_function=3;
+      let formData = new FormData();
+      formData.append("file1", this.$refs.file1.files[0]);
+      this.counter.Return_data = await axios({ method: 'post',data:formData, headers: {'Content-Type': 'multipart/form-data'}, url: this.counter.domain_Backend + '/get-my-zip-file-product' });
+      // this.counter.Information_Member();
+      this.counter.Return_data = this.counter.Return_data.data.data;
+      this.counter.button_function=4;
+      await this.sleep(60000)
+      this.resetFile1();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-my-zip-file-product' });
+      }
+      catch{
+        this.counter.button_function=1;
+        this.counter.Loi_file = 2;
+      }
+    },
+    async Send_data2() {
+      try{
+      this.counter.Loi_file=1;
+      this.counter.button_function=3;
+      let formData = new FormData();
+      formData.append("file2", this.$refs.file2.files[0]);
+      this.counter.Return_data = await axios({ method: 'post',data:formData, headers: {'Content-Type': 'multipart/form-data'}, url: this.counter.domain_Backend + '/get_file_calendar' });
+      // this.counter.Information_Member();
+      this.counter.Return_data = this.counter.Return_data.data.data;
+      this.counter.button_function=4;
+      await this.sleep(60000)
+      this.resetFile2();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-file-calendar' });
+      }
+      catch{
+        this.counter.button_function=1;
+        this.counter.Loi_file = 2;
+      }
+    },
+    async Send_data3() {
+      try{
+      this.counter.Loi_file=1;
+      this.counter.button_function=3;
+      let formData = new FormData();
+      formData.append("file3", this.$refs.file3.files[0]);
+      this.counter.Return_data = await axios({ method: 'post',data:formData, headers: {'Content-Type': 'multipart/form-data'}, url: this.counter.domain_Backend + '/get-file-sortqc' });
+      // this.counter.Information_Member();
+      this.counter.Return_data = this.counter.Return_data.data.data;
+      this.counter.button_function=4;
+      await this.sleep(60000)
+      this.resetFile3();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-file-sortqc' });
+      }
+      catch{
+        this.counter.button_function=1;
+        this.counter.Loi_file = 2;
+      }
+    },    
     sleep (time) {
       return new Promise((resolve) => setTimeout(resolve, time));
     },
@@ -182,6 +381,24 @@ export default {
       this.resetFile();
       this.counter.button_function=1;
       await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-my-zip-file' });
+    },
+    async delete_zip1() {
+      await this.sleep(60000)
+      this.resetFile1();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-my-zip-file-product' });
+    },
+    async delete_zip2() {
+      await this.sleep(60000)
+      this.resetFile2();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-file-calendar' });
+    },
+    async delete_zip3() {
+      await this.sleep(60000)
+      this.resetFile3();
+      this.counter.button_function=1;
+      await axios({ method: 'post',data:{Return_data:this.counter.Return_data}, url: this.counter.domain_Backend + '/delete-file-sortqc' });
     },
     },
     components: {
